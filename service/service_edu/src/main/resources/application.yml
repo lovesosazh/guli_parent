@@ -1,0 +1,53 @@
+server:
+  port: 8110
+  tomcat:
+    max-threads: 10
+spring:
+  profiles:
+    active: dev
+  application:
+    name: service-edu
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/guli_edu?serverTimezone=GMT%2B8
+    username: root
+    password: denglong
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 # nacos服务注册中心
+    sentinel:
+      transport:
+        port: 8081
+        dashboard: localhost:8080
+  redis:
+    host: 192.168.100.129
+    port: 6379
+    database: 0
+    password:  #默认为空
+    lettuce:
+      pool:
+        max-active: 20  #最大连接数，负值表示没有限制，默认8
+        max-wait: -1    #最大阻塞等待时间，负值表示没限制，默认-1
+        max-idle: 8     #最大空闲连接，默认8
+        min-idle: 0     #最小空闲连接，默认0
+
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:/com/lovesosa/guli/service/edu/mapper/xml/*.xml
+
+#设置feign客户端超时时间
+ribbon:
+  #指的是建立连接后从服务器读取到可用资源所用的时间
+  ReadTimeout: 5000
+  #指的是建立连接所用的时间，适用于网络状况正常的情况下，两端连接所用的时间
+  ConnecTimeout: 5000
+
+feign:
+  sentinel:
+    enabled: true

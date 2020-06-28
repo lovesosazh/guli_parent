@@ -1,0 +1,21 @@
+server:
+  port: 8120
+spring:
+  profiles:
+    active: dev
+  application:
+    name: service-oss
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 # nacos服务注册中心
+aliyun:
+ oss:
+  endpoint: oss-cn-beijing.aliyuncs.com
+  keyid: LTAI4G1sHD6VwQLM6t4BRyWs
+  keysecret: 4X53qlVkrhWQ6Q6C3xA04W5BjOSxOQ
+  #bucket可以在控制台创建，也可以使用java代码创建，注意先测试bucket是否已被占用
+  bucketname: guli-edu-20200526
+
+
+

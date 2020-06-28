@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lovesosa.guli.service.edu.mapper.CourseCollectMapper">
+
+    <select id="selectPageByMemberId" resultType="com.lovesosa.guli.service.edu.entity.vo.CourseCollectVO">
+        SELECT
+            cv.id,
+            c.id AS courseId,
+            c.title,
+            CONVERT(c.price, DECIMAL(8,2)) AS price,
+            c.lesson_num AS lessonNum,
+            c.cover,
+            cv.gmt_create AS gmtCreate,
+            t.name AS teacherName
+            FROM
+            edu_course_collect cv
+            LEFT JOIN edu_course c ON cv.course_id = c.id
+            LEFT JOIN edu_teacher t ON c.teacher_id = t.id
+            WHERE cv.member_id = #{memberId}
+            order by cv.gmt_create desc
+    </select>
+</mapper>
